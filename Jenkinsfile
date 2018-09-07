@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        
+        stage('docker container cleanup') {
+            steps {
+                sh 'docker ps -q -f status=exited | xargs --no-run-if-empty docker rm'
+                  }
+        }
+        
         stage('Pull Oracle 12C docker image') {
             steps {
                 sh "docker pull sath89/oracle-12c"
