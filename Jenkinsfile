@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {
         
-        stage('docker container cleanup') {
+        stage('docker containers cleanup') {
             steps {
+                sh "docker ps --all -q | xargs --no-run-if-empty docker container stop"
+                
                 sh 'docker ps -q -f status=exited | xargs --no-run-if-empty docker rm'
                   }
         }
