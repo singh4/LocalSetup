@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Run the Weblogic12 docker container') {
             steps {
-                sh "docker run -d -p 49163:7001 -p 49164:7002 ismaleiva90/weblogic12:latest"
+                sh "docker run -d -p 7001:7001 -p 7002:7002 ismaleiva90/weblogic12:latest"
             }
         }
     }
