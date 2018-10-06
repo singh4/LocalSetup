@@ -2,13 +2,13 @@ pipeline {
     agent any
     
     stages {
-        withCredentials([usernameColonPassword(credentialsId: 'vagrant', variable: 'vagrant')]) {
+        
         stage('Resource and entity build') {
             steps {
-               
+               withCredentials([usernameColonPassword(credentialsId: 'vagrant', variable: 'vagrant')]) {
                 sh "cd /opt/IBM/OMS/Sterling95/bin && ./deployer.sh -t entitydeployer"
                 
-               
+               }
                   }
         }
         
@@ -18,5 +18,5 @@ pipeline {
             }
         }
     }
-    }
+    
 }
