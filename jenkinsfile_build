@@ -5,7 +5,7 @@ pipeline {
         stage('Resource and entity build') {
             steps {
                 sh "cd /opt/IBM/OMS/Sterling95/bin"
-                sh "deployer.sh -t entitydeployer"
+                sh "./deployer.sh -t entitydeployer"
                 
                
                   }
@@ -14,7 +14,7 @@ pipeline {
         stage('build ear') {
             steps {
                 sh "cd /opt/IBM/OMS/Sterling95/bin"
-                sh "buildear.sh -Dearfile=smcfs.ear -Dwarfiles=smcfs,sbc,isccs,wsc -Dappserver=weblogic -Dnowebservice=true -Ddevmode=true -Duidevmode=true -Dnodocear=true create-ear"
+                sh "./buildear.sh -Dearfile=smcfs.ear -Dwarfiles=smcfs,sbc,isccs,wsc -Dappserver=weblogic -Dnowebservice=true -Ddevmode=true -Duidevmode=true -Dnodocear=true create-ear"
             }
         }
     }
