@@ -1,9 +1,8 @@
 pipeline {
-
     agent any
-    withCredentials([usernameColonPassword(credentialsId: 'vagrant', variable: 'vagrant')]) {
+    
     stages {
-        
+        withCredentials([usernameColonPassword(credentialsId: 'vagrant', variable: 'vagrant')]) {
         stage('Resource and entity build') {
             steps {
                
