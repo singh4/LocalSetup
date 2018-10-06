@@ -5,16 +5,20 @@ pipeline {
         
         stage('Resource and entity build') {
             steps {
-               
-                sh "su vagrant -c 'echo vagrant' cd /opt/IBM/OMS/Sterling95/bin && ./deployer.sh -t entitydeployer"
+               withCredentials([usernamePassword(credentialsId: 'vagrant',
+                     usernameVariable: 'vagrant', passwordVariable: 'vagrant')]) {
+                sh "cd /opt/IBM/OMS/Sterling95/bin && ./deployer.sh -t entitydeployer"
                 
-               
+               }
                   }
         }
         
         stage('build ear') {
             steps {
-                sh "su vagrant -c 'echo vagrant' cd /opt/IBM/OMS/Sterling95/bin && ./buildear.sh -Dearfile=smcfs.ear -Dwarfiles=smcfs,sbc,isccs,wsc -Dappserver=weblogic -Dnowebservice=true -Ddevmode=true -Duidevmode=true -Dnodocear=true create-ear"
+            withCredentials([usernamePassword(credentialsId: 'vagrant',
+                     usernameVariable: 'vagrant', passwordVariable: 'vagrant')]) {
+                sh "cd /opt/IBM/OMS/Sterling95/bin && ./buildear.sh -Dearfile=smcfs.ear -Dwarfiles=smcfs,sbc,isccs,wsc -Dappserver=weblogic -Dnowebservice=true -Ddevmode=true -Duidevmode=true -Dnodocear=true create-ear"
+            }
             }
         }
     }
